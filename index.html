@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+  <title>¡Atrapa los corazones!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #ffe6eb;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      text-align: center;
+    }
+    h1 {
+      color: #d1006b;
+      margin-top: 30px;
+      font-size: 2em;
+    }
+    #contador {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+    .corazon {
+      position: absolute;
+      font-size: 24px;
+      animation: caer linear;
+      cursor: pointer;
+    }
+    @keyframes caer {
+      from { top: -50px; }
+      to { top: 100%; }
+    }
+    #sorpresa {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      color: #ffe6eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-size: 2em;
+      z-index: 999;
+      display: none;
+      animation: fadeIn 2s ease-in;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    #confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: url('https://i.imgur.com/1Uc6Qwa.gif');
+      background-size: cover;
+      opacity: 0.7;
+    }
+    .flower {
+      position: absolute;
+      font-size: 1.2em;
+      opacity: 0;
+      animation: aparecerDesaparecer 4s ease-in-out forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .heart {
+      position: absolute;
+      font-size: 1.2em;
+      opacity: 0;
+      animation: aparecerDesaparecer 4s ease-in-out forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes aparecerDesaparecer {
+      0% { opacity: 0; transform: scale(0.5); }
+      30% { opacity: 1; transform: scale(1.2); }
+      70% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.5); }
+    }
+    #youtube-video {
+      margin-top: 30px;
+      width: 80%;
+      max-width: 560px;
+      height: 315px;
+      border: none;
+      border-radius: 12px;
+      display: none;
+      z-index: 2;
+    }
+    #mensaje-floreado {
+      position: relative;
+      z-index: 3;
+    }
+    #enlace-cancion {
+        margin-top: 30px;
+        font-size: 0.7em;
+        font-family: 'Playfair Display', serif;
+        font-weight: 500;
+        background: rgba(255, 240, 250, 0.08);
+        color: #ffc4e1;
+        padding: 12px 20px;
+        border-left: 5px solid #ff7ccf;
+        border-radius: 8px;
+        box-shadow: 0 0 12px rgba(255, 124, 207, 0.2);
+        transition: all 0.3s ease-in-out;
+    }
+    #enlace-cancion a {
+        color: #ffd1f0;
+        font-style: italic;
+        text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>¡Atrapa los corazones! 💕</h1>
+  <p>Debes atrapar 10 corazones para ver la sorpresa.</p>
+  <p id="contador">Corazones atrapados: 0/10</p>
+
+  <div id="sorpresa">
+    <div id="confetti"></div>
+    <p>💖 Por si nadie te lo había dicho hoy... 💖</p>
+    <div id="mensaje-floreado" style="font-size: 0.8em; max-width: 90%; margin-top: 20px;"></div>
+    <div id="enlace-cancion" style="display:none;">
+      Puedes escuchar esta canción que especialmente te define: <br>
+      <a href="https://www.youtube.com/watch?v=1Nr_tqkMsJs" target="_blank">Haz clic aquí para escucharla</a>
+    </div>
+  </div>
+
+  <script>
+    let corazonesAtrapados = 0;
+    const contador = document.getElementById("contador");
+    const sorpresa = document.getElementById("sorpresa");
+    const mensaje = document.getElementById("mensaje-floreado");
+    const enlaceCancion = document.getElementById("enlace-cancion");
+
+    const flores = ["🌺"];
+    const corazones = ["❤️", "💜", "💖", "💗"];
+    const texto = "Que jamás se te olvide el mujerón que eres, porque tú lo tienes todo. Eres un lujo que no cualquiera puede tener, demasiada mujer para aquellos que carecen de sensibilidad, para esos que no saben apreciar el arte que eres.";
+    const palabras = texto.split(" ");
+
+    function crearCorazon() {
+      const corazon = document.createElement("div");
+      corazon.classList.add("corazon");
+      corazon.innerText = "💕";
+      corazon.style.left = Math.random() * 100 + "vw";
+      corazon.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+      corazon.addEventListener("click", () => {
+        corazon.remove();
+        corazonesAtrapados++;
+        contador.innerText = `Corazones atrapados: ${corazonesAtrapados}/10`;
+        if (corazonesAtrapados >= 10) {
+          mostrarSorpresa();
+        }
+      });
+
+      document.body.appendChild(corazon);
+
+      setTimeout(() => {
+        corazon.remove();
+      }, 6000);
+    }
+
+    function mostrarSorpresa() {
+      sorpresa.style.display = "flex";
+      mostrarPalabrasAnimadas();
+    }
+
+    function mostrarPalabrasAnimadas() {
+      let i = 0;
+      const intervalo = setInterval(() => {
+        if (i >= palabras.length) {
+          clearInterval(intervalo);
+          setTimeout(() => {
+            enlaceCancion.style.display = 'block';
+          }, 5000);
+          return;
+        }
+        const palabra = document.createElement("span");
+        palabra.textContent = palabras[i] + " ";
+        mensaje.appendChild(palabra);
+
+        const flor = document.createElement("div");
+        flor.className = "flower";
+        flor.textContent = flores[Math.floor(Math.random() * flores.length)];
+        flor.style.left = Math.random() * 100 + "vw";
+        flor.style.top = Math.random() * 100 + "vh";
+        sorpresa.appendChild(flor);
+
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = corazones[Math.floor(Math.random() * corazones.length)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = Math.random() * 100 + "vh";
+        sorpresa.appendChild(heart);
+
+        i++;
+      }, 300);
+    }
+
+    setInterval(crearCorazon, 500);
+  </script>
+</body>
+</html>
