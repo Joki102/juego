@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
   <title>¡Atrapa los corazones!</title>
   <style>
     body {
@@ -56,16 +55,16 @@
       to { opacity: 1; }
     }
     #confetti {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      background: url('https://i.imgur.com/1Uc6Qwa.gif');
-      background-size: cover;
-      opacity: 0.7;
-    }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(255, 182, 193, 0.1), rgba(255, 192, 203, 0.2), transparent);
+  opacity: 0.5;
+  z-index: 0;
+}
     .flower {
       position: absolute;
       font-size: 1.2em;
@@ -103,24 +102,19 @@
       z-index: 3;
     }
     #enlace-cancion {
-        margin-top: 30px;
-        font-size: 0.7em;
-        font-family: 'Playfair Display', serif;
-        font-weight: 500;
-        background: rgba(255, 240, 250, 0.08);
-        color: #ffc4e1;
-        padding: 12px 20px;
-        border-left: 5px solid #ff7ccf;
-        border-radius: 8px;
-        box-shadow: 0 0 12px rgba(255, 124, 207, 0.2);
-        transition: all 0.3s ease-in-out;
+      margin-top: 30px;
+      font-size: 0.6em;
+      font-weight: bold;
+      background: rgba(255,255,255,0.05);
+      padding: 10px 15px;
+      border-radius: 10px;
+      color: #ffd1e3;
+      z-index: 3;
     }
     #enlace-cancion a {
-        color: #ffd1f0;
-        font-style: italic;
-        text-decoration: underline;
+      color: #ff7ccf;
+      text-decoration: underline;
     }
-
   </style>
 </head>
 <body>
@@ -133,7 +127,7 @@
     <p>💖 Por si nadie te lo había dicho hoy... 💖</p>
     <div id="mensaje-floreado" style="font-size: 0.8em; max-width: 90%; margin-top: 20px;"></div>
     <div id="enlace-cancion" style="display:none;">
-      Puedes escuchar esta canción que especialmente te define: <br>
+      🎶 Esta canción refleja lo especial que eres: <br>
       <a href="https://www.youtube.com/watch?v=1Nr_tqkMsJs" target="_blank">Haz clic aquí para escucharla</a>
     </div>
   </div>
